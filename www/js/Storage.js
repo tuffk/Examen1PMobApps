@@ -16,32 +16,36 @@
                             {id: 2, nombre: "Fritada de ranas", img: "../img/rana.jpg"},
                             {id: 3, nombre: "Tlacoyos", img: "../img/tla.png"},
                             {id: 4, nombre: "Tostadas de pata", img: "../img/pata.png"},
-                            {id: 5, nombre: "Nopalitos con chipotle", img: "../img/nopa.jpg"}
+                            {id: 5, nombre: "Tacos de Longaniza ", img: "../img/taco.jpg"}
                         ],
                         receta_ingrediente: [
                                                 {id_receta: 1, id_ingrediente: 1},
                                                 {id_receta: 2, id_ingrediente: 3},
-                                                {id_receta: 2, id_ingrediente: 4}
+                                                {id_receta: 2, id_ingrediente: 4},
+                                                {id_receta: 3, id_ingrediente: 4},
+                                                {id_receta: 4, id_ingrediente: 3},
+                                                {id_receta: 4, id_ingrediente: 1},
+                                                {id_receta: 5, id_ingrediente: 4}
                                             ],
                         ingrediente: [
                             {id: 1, nombre: "Crema"},
-                            {id: 2, nombre: "Tostada"},
+                            {id: 2, nombre: "Ostiones en su Centro"},
                             {id: 3, nombre: "Rana"},
-                            {id: 4, nombre: "Fritadas"},
+                            {id: 4, nombre: "Queso Bas"},
                             {id: 5, nombre: "Marshmamellow"},
                             {id: 6, nombre: "Spaguetti (SIN COCER)"},
-                            {id: 7, nombre: "Chipotle"},
+                            {id: 7, nombre: ""},
                             {id: 8, nombre: "Nopales"}
                         ],
                         //pedido_receta: [],
                         pedido: [],
                         cliente: [
                             {
-                                nombre: "Marcos", 
+                                nombre: "Jaime", 
                                 password: "12345", 
-                                email: "marcos@gmail.com", 
-                                telefono: "5566778899", 
-                                ubicacion: "Jugueteria"
+                                email: "Jaime@gmail.com", 
+                                telefono: "5569696969", 
+                                ubicacion: "Olimpo"
                             },
                             {
                                 nombre: "Raul",
