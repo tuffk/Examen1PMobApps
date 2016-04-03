@@ -135,7 +135,7 @@
         $scope.regresar = function(){
             if(pedido_actual.personalizar === "S"){
                 ing_pla_temp = [];
-                $state.go('personalizar');
+                $state.go('menudia');
             } else {
                 ing_pla_temp = [];
                 $state.go('menudia');

@@ -16,7 +16,7 @@
                             {id: 2, nombre: "Fritada de ranas", img: "../img/rana.jpg"},
                             {id: 3, nombre: "Tlacoyos", img: "../img/tla.png"},
                             {id: 4, nombre: "Tostadas de pata", img: "../img/pata.png"},
-                            {id: 5, nombre: "Tacos de Longaniza ", img: "../img/taco.jpg"}
+                            {id: 5, nombre: "Nopales con chipotle ", img: "../img/taco.jpg"}
                         ],
                         receta_ingrediente: [
                                                 {id_receta: 1, id_ingrediente: 1},
@@ -32,10 +32,8 @@
                             {id: 2, nombre: "Ostiones en su Centro"},
                             {id: 3, nombre: "Rana"},
                             {id: 4, nombre: "Queso Bas"},
-                            {id: 5, nombre: "Marshmamellow"},
-                            {id: 6, nombre: "Spaguetti (SIN COCER)"},
-                            {id: 7, nombre: ""},
-                            {id: 8, nombre: "Nopales"}
+                            {id: 5, nombre: "Salsa"},
+                            {id: 6, nombre: "Nopales"}
                         ],
                         //pedido_receta: [],
                         pedido: [],
