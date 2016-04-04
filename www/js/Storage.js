@@ -1,7 +1,7 @@
 (function(){
     var app = angular.module('starter.Storage', []);
     
-    app.factory('Storage', function(){
+    app.factory('Storage', function($http){
         
         var bd = angular.fromJson(window.localStorage['bd'] || '{}');
         function persist(){
@@ -11,50 +11,123 @@
         return {
           nuevo: function(){
               bd = {
-                        receta: [
-                            {id: 1, nombre: "Huitlacoche con crema", img: "../img/hui.jpg"},
-                            {id: 2, nombre: "Fritada de ranas", img: "../img/rana.jpg"},
-                            {id: 3, nombre: "Tlacoyos", img: "../img/tla.png"},
-                            {id: 4, nombre: "Tostadas de pata", img: "../img/pata.png"},
-                            {id: 5, nombre: "Nopales con chipotle ", img: "../img/taco.jpg"}
-                        ],
+                        /*receta: [
+                            {
+                                id: 1, 
+                                nombre: "Huitlacoche con crema", 
+                                img: "../img/hui.jpg",
+                                libro: "Allah Uakbar",
+                                tipo: "Crema",
+                                procedimiento: "Echarle crema al huitlacoche",
+                                original: "S",
+                                chef: "Raul Morales",
+                                calorias: 2000,
+                                precio: 100,
+                                receta_original: "Crema lechera"
+                            },
+                            {
+                                id: 2, 
+                                nombre: "Fritada de ranas", 
+                                img: "../img/rana.jpg",
+                                libro: "Como Programar en Rana",
+                                tipo: "Carne",
+                                procedimiento: "Matar rana y echarla en tostada",
+                                original: "N",
+                                chef: "Nicolas Maduro",
+                                calorias: 667,
+                                precio: 220,
+                                receta_original: "Ranas a la boloñesa"
+                            },
+                            {
+                                id: 3, 
+                                nombre: "Tlacoyos", 
+                                img: "../img/tla.png",
+                                libro: "Tlacoyos for dummies",
+                                tipo: "Carne",
+                                procedimiento: "Echar chorizo a tlacoyo",
+                                original: "S",
+                                chef: "Raul Morales",
+                                calorias: 777,
+                                precio: 90,
+                                receta_original: "Quesadillas con choriqueso"
+                            },
+                            {
+                                id: 4, 
+                                nombre: "Tostadas de pata", 
+                                img: "../img/pata.png",
+                                libro: "Patas de cabra",
+                                tipo: "Carne",
+                                procedimiento: "Cortar patas y echarlo en tostada",
+                                original: "N",
+                                chef: "Peña Nieto",
+                                calorias: 678,
+                                precio: 125,
+                                receta_original: "Pata al horno"
+                            },
+                            {
+                                id: 5, 
+                                nombre: "Nopalitos con chipotle", 
+                                img: "../img/nopa.jpg",
+                                libro: "Nopalitos Avanzado",
+                                tipo: "Verdura dura",
+                                procedimiento: "Echar chipotles al nopal",
+                                original: "S",
+                                chef: "Chapo Guzman",
+                                calorias: 1111,
+                                precio: 190,
+                                receta_original: "Nopales con chile"
+                            }
+                        ],*/
+                        receta: [  ],
                         receta_ingrediente: [
-                                                {id_receta: 1, id_ingrediente: 1},
-                                                {id_receta: 2, id_ingrediente: 3},
-                                                {id_receta: 2, id_ingrediente: 4},
-                                                {id_receta: 3, id_ingrediente: 4},
-                                                {id_receta: 4, id_ingrediente: 3},
-                                                {id_receta: 4, id_ingrediente: 1},
-                                                {id_receta: 5, id_ingrediente: 4}
+                                                {id_receta: 1, id_ingrediente: 1, cantidad: 5},
+                                                {id_receta: 2, id_ingrediente: 3, cantidad: 3},
+                                                {id_receta: 2, id_ingrediente: 4, cantidad: 7},
+                                                {id_receta: 3, id_ingrediente: 10, cantidad: 1},
+                                                {id_receta: 4, id_ingrediente: 2, cantidad: 3},
+                                                {id_receta: 4, id_ingrediente: 9, cantidad: 4},
+                                                {id_receta: 5, id_ingrediente: 8, cantidad: 2},
+                                                {id_receta: 5, id_ingrediente: 7, cantidad: 4}
                                             ],
                         ingrediente: [
                             {id: 1, nombre: "Crema"},
-                            {id: 2, nombre: "Ostiones en su Centro"},
+                            {id: 2, nombre: "Tostada"},
                             {id: 3, nombre: "Rana"},
-                            {id: 4, nombre: "Queso Bas"},
-                            {id: 5, nombre: "Salsa"},
-                            {id: 6, nombre: "Nopales"}
+                            {id: 4, nombre: "Fritadas"},
+                            {id: 5, nombre: "Marshmallow"},
+                            {id: 6, nombre: "Spaguetti"},
+                            {id: 7, nombre: "Chipotle"},
+                            {id: 8, nombre: "Nopales"},
+                            {id: 9, nombre: "Patas"},
+                            {id: 10, nombre: "Chorizo"}
                         ],
                         //pedido_receta: [],
                         pedido: [],
                         cliente: [
                             {
-                                nombre: "Jaime", 
-                                password: "12345", 
-                                email: "Jaime@gmail.com", 
-                                telefono: "5569696969", 
-                                ubicacion: "Olimpo"
+                                id: 1,
+                                nombre: "jaime", 
+                                password: "1", 
+                                email: "marcos@gmail.com", 
+                                telefono: "5566778899", 
+                                ubicacion: "Jugueteria"
                             },
                             {
-                                nombre: "Raul",
-                                password: "6969",
+                                id: 2,
+                                nombre: "raul",
+                                password: "666",
                                 email: "raulms@itesm.mx",
-                                telefono: "5569696969",
-                                ubicacion: "El cuarto de la princesa"
+                                telefono: "5566776677",
+                                ubicacion: "Aulas 3 Piso 2"
                             }
                         ]
                };
                
+               $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.receta.php').success(function(posts){
+                    angular.forEach(posts, function(post){
+                        bd.receta.push(post);
+                    });
+               });
                persist();
                return;
               
@@ -63,6 +136,7 @@
             return bd;  
           },
           getCliente: function(nombre, pass){
+              
               for (var i = 0; i < bd.cliente.length; i++){  
                     if(pass === bd.cliente[i].password && nombre.toLowerCase() === bd.cliente[i].nombre.toLowerCase()){
                         return bd.cliente[i];
@@ -72,13 +146,36 @@
               return;
           },
           getPass: function(nombre, pass){
-              for (var i = 0; i < bd.cliente.length; i++){  
+              
+              var user;
+              
+              var i = 0;
+              
+              $http.post('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.login.php?name=' + nombre +'&pass=' + pass).success(function(posts){
+                  
+                  user = posts[0];
+                  console.log(user);
+                  return user;
+                 /*angular.forEach(posts, function(post){
+                      if(post != null) {
+                        user = post;
+                          console.log("QUe petardo?\n");
+                      }
+                 });*/
+              }).error(function(){
+                  console.log("QUe pedo?\n");
+              });
+              
+              //console.log(user);
+              
+              //return;
+              /*for (var i = 0; i < bd.cliente.length; i++){  
                     if(pass === bd.cliente[i].password && nombre.toLowerCase() === bd.cliente[i].nombre.toLowerCase()){
                         return true;
                     }
               }
               
-              return false;
+              return false;*/
           },
           pushPedido: function(pedido){
               bd.pedido.push(pedido);
@@ -103,7 +200,7 @@
                   if(id_receta === bd.receta_ingrediente[i].id_receta){
                       for(var j = 0; j < bd.ingrediente.length; j++){
                           if(bd.receta_ingrediente[i].id_ingrediente == bd.ingrediente[j].id){
-                              ingredientes.push(bd.ingrediente[j].nombre);
+                              ingredientes.push({nombre: bd.ingrediente[j].nombre, cantidad: bd.receta_ingrediente[i].cantidad});
                           }
                       }
                   }
@@ -119,6 +216,14 @@
                   }
               }
               
+          },
+          getRecetaByName: function(receta){
+            
+              for(var i = 0; i < bd.receta.length; i++){
+                  if(receta === bd.receta[i].nombre){
+                      return bd.receta[i];
+                  }
+              }          
           }
             
         };
