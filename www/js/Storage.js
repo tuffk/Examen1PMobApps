@@ -1,7 +1,7 @@
 (function(){
     var app = angular.module('starter.Storage', []);
     
-    app.factory('Storage', function($http){
+    app.factory('Storage', function($http, $sce){
         
         var bd = angular.fromJson(window.localStorage['bd'] || '{}');
         function persist(){
@@ -106,15 +106,15 @@
                         cliente: [
                             {
                                 id: 1,
-                                nombre: "jaime", 
+                                nombre: "Jaime", 
                                 password: "1", 
-                                email: "marcos@gmail.com", 
+                                email: "Jaime@gmail.com", 
                                 telefono: "5566778899", 
                                 ubicacion: "Jugueteria"
                             },
                             {
                                 id: 2,
-                                nombre: "raul",
+                                nombre: "Raul",
                                 password: "666",
                                 email: "raulms@itesm.mx",
                                 telefono: "5566776677",
@@ -122,12 +122,23 @@
                             }
                         ]
                };
+              
+              var defaultHTTPHeaders =  {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json'
+              }
+              
+              $http.defaults.headers.post = defaultHTTPHeaders;
                
-               $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.receta.php').success(function(posts){
+               $http.get($sce.trustAsResourceUrl('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.receta.php')).success(function(posts){
                     angular.forEach(posts, function(post){
                         bd.receta.push(post);
                     });
+               }).error(function(){
+                   alert("Hubo un error al conectar con las recetas.php\n");
                });
+              
+              
                persist();
                return;
               
@@ -147,35 +158,23 @@
           },
           getPass: function(nombre, pass){
               
-              var user;
-              
-              var i = 0;
-              
-              $http.post('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.login.php?name=' + nombre +'&pass=' + pass).success(function(posts){
+              $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.login.php?name=' + nombre +'&pass=' + pass).success(function(posts){
                   
-                  user = posts[0];
-                  console.log(user);
-                  return user;
-                 /*angular.forEach(posts, function(post){
-                      if(post != null) {
-                        user = post;
-                          console.log("QUe petardo?\n");
-                      }
-                 });*/
+                  console.log(posts[0]);
+                  
+                  if(posts[0] != null){
+                    alert(posts[0].nombre);
+                    return posts[0];   
+                  }
+                  else {
+                      return null;
+                  }
+                  
               }).error(function(){
-                  console.log("QUe pedo?\n");
+                  console.log("Hubo un error\n");
+                  return null;
               });
               
-              //console.log(user);
-              
-              //return;
-              /*for (var i = 0; i < bd.cliente.length; i++){  
-                    if(pass === bd.cliente[i].password && nombre.toLowerCase() === bd.cliente[i].nombre.toLowerCase()){
-                        return true;
-                    }
-              }
-              
-              return false;*/
           },
           pushPedido: function(pedido){
               bd.pedido.push(pedido);
@@ -183,6 +182,7 @@
               return;
           },
           getImagen: function(platillo){
+              
               
               for(var i = 0; i < bd.receta.length; i++){
                   if(platillo === bd.receta[i].nombre){
@@ -219,11 +219,42 @@
           },
           getRecetaByName: function(receta){
             
+              var parameter = encodeURIComponent(receta.trim());
+              
+              
               for(var i = 0; i < bd.receta.length; i++){
                   if(receta === bd.receta[i].nombre){
                       return bd.receta[i];
                   }
               }          
+          },
+          getRecetas: function(){
+              var recetas = [];
+              
+              $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.receta.php').success(function(posts){
+                    angular.forEach(posts, function(post){
+                        recetas.push(post);
+                    });
+               }).error(function(){
+                   console.log("Hubo un error al conectar con las recetas.php\n");
+                   return null;
+               });
+              
+              return recetas;
+          },
+          getAllIngredientes: function(){
+              var ingredientes = [];
+              
+              $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.receta.php').success(function(posts){
+                    angular.forEach(posts, function(post){
+                        ingredientes.push(post);
+                    });
+               }).error(function(){
+                   console.log("Hubo un error al conectar con los ingredientes.php\n");
+                   return null;
+               });
+              
+              return ingredientes;
           }
             
         };
