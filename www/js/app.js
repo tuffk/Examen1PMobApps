@@ -106,7 +106,7 @@
            
            //console.log(cliente);
            
-           $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1020023/servicios/examen/backend/servicio.login.php?name=' + $scope.cliente.nombre +'&pass=' + $scope.cliente.password).then(function(posts){
+           $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.login.php?name=' + $scope.cliente.nombre +'&pass=' + $scope.cliente.password).then(function(posts){
                   
                   if(posts.data !== "null"){
                     cliente_actual = posts.data[0];
@@ -135,7 +135,7 @@
        
        var recetas = [];
               
-       $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1020023/servicios/examen/backend/servicio.receta.php').success(function(posts){                    angular.forEach(posts, function(post){
+       $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.receta.php').success(function(posts){                    angular.forEach(posts, function(post){
                         recetas.push(post);
               });
                 $scope.recetas = recetas;
@@ -149,13 +149,13 @@
                     
                     if(seleccion != ""){
                 
-                        $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1020023/servicios/examen/backend/servicio.una.receta.php?name=' + seleccion).success(function(posts){
+                        $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.una.receta.php?name=' + seleccion).success(function(posts){
                             platillo_actial = posts[0];
                         
                             if(pedido_actual.personalizar === "S"){
                                 $state.go('personalizar');
                             } else {
-                                $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1020023/servicios/examen/backend/servicio.ingredientes.receta.php?name=' + seleccion).success(function(posts){
+                                $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.ingredientes.receta.php?name=' + seleccion).success(function(posts){
                                     angular.forEach(posts, function(post){
                                         ing_pla_temp.push(post);
                                     });
@@ -176,7 +176,7 @@
         $scope.platillo = pedido_actual.platillo;
         var ingredientes = [];
         
-        $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1020023/servicios/examen/backend/servicio.ingredientes.php').success(function(posts){
+        $http.get('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.ingredientes.php').success(function(posts){
             angular.forEach(posts, function(post){
                 ingredientes.push(post);
             });
@@ -247,9 +247,9 @@
         $scope.salir = function(){
             
             var pedidoObj = JSON.stringify(pedido_actual);
-            var postURL = $sce.trustAsResourceUrl('http://ubiquitous.csf.itesm.mx/~pddm-1020023/servicios/examen/backend/servicio.insertar.pedido.php');
+            var postURL = $sce.trustAsResourceUrl('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.insertar.pedido.php');
             
-            $http.post('http://ubiquitous.csf.itesm.mx/~pddm-1020023/servicios/examen/backend/servicio.insertar.pedido.php?id=' + pedido_actual.id + '&hp=' + pedido_actual.hora_pedido + '&he=' + pedido_actual.hora_entrega + '&fp=' + pedido_actual.formato_pago + '&idc=' + pedido_actual.id_cliente + '&pe=' + pedido_actual.personalizar + '&pl=' + pedido_actual.platillo + '&idr=' + platillo_actial.id).then(function(){
+            $http.post('http://ubiquitous.csf.itesm.mx/~pddm-1019332/examen/backend/servicio.insertar.pedido.php?id=' + pedido_actual.id + '&hp=' + pedido_actual.hora_pedido + '&he=' + pedido_actual.hora_entrega + '&fp=' + pedido_actual.formato_pago + '&idc=' + pedido_actual.id_cliente + '&pe=' + pedido_actual.personalizar + '&pl=' + pedido_actual.platillo + '&idr=' + platillo_actial.id).then(function(){
                 alert("Pedido recibido\n");
                 $state.go('logging');
                 location.reload(1);
